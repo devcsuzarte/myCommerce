@@ -6,6 +6,7 @@ import { AddScreen } from './screens/AddScreen/addScreen';
 import { ItemScreen } from './screens/ItemScreen/itemScreen';
 import { BuyScreen } from './screens/BuyScreen/BuyScreen'
 import { RecordsScreen } from './screens/RecordsScreen/recordsScreen';
+import { SignUpScreen } from './screens/SignUpScreen/signUpScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name='Home' component={HomeScreen}/>
         <Stack.Screen name='Add' component={AddScreen}/>
         <Stack.Screen name='Login' component={LoginScreen}/>
+        <Stack.Screen name='SignUp' component={SignUpScreen}/>
         <Stack.Screen name='Item' component={ItemScreen}/>
         <Stack.Screen name='Buy' component={BuyScreen}/>   
         <Stack.Screen name='Records' component={RecordsScreen}/>           

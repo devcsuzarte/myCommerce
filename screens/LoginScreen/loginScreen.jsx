@@ -86,7 +86,7 @@ export function LoginScreen({ navigation }) {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={s.btnSingUp}
-                        onPress={singUp}
+                        onPress={() => navigation.navigate('SignUp')}
                     >
                         <Text style={s.btnTxt}>
                             CADASTRAR
