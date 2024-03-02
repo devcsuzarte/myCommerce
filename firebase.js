@@ -26,6 +26,9 @@ const sentError = {
   errorCode: ""
 };
 
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
 //const auth = getAuth();
 
 const auth = initializeAuth(app, {
@@ -34,7 +37,7 @@ const auth = initializeAuth(app, {
 
 
 
-const handleSingUp = (email, password) => {
+const handleSingUp = (email, password, commerce, name) => {
 
   console.log(`${email} ----- ${password}`);
 
@@ -42,6 +45,7 @@ const handleSingUp = (email, password) => {
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
+    setUser(name, commerce, email);
     // ...
   })
   .catch((error) => {
@@ -67,11 +71,32 @@ signInWithEmailAndPassword(auth, email, password)
   });
 }
 
+// Add User on data base
+
+async function setUser(userName, commerceName, userEmail) {
+
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+
+        userName: userName,
+        commerceName: commerceName,
+        userEmail: userEmail,
+
+      });
+      console.log("Document written with ID: ", docRef.id);
+
+    } catch (e) {
+
+        console.error("Error adding document: ", e);
+      
+    }
+}
+
+
 
 // Add item
 
-// Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+
 
 async function setItem(itemTitle, itemAmount, itemPrice, itemDescription){
 
@@ -146,4 +171,4 @@ async function updateStock(itemId, amountUpdated){
 }
 
 
-export { auth, handleSingUp, handleSingIn, setItem, updateItem, updateStock, sentError, setSell, db };
+export { auth, handleSingUp, handleSingIn, setItem, setUser, updateItem, updateStock, sentError, setSell, db };

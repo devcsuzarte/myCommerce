@@ -1,6 +1,8 @@
 import { View, Text, TextInput, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity, Keyboard} from "react-native";
 import { s } from "./signUpScreen.style"
 import { useState } from "react";
+import { setUser } from "../../firebase";
+import { auth, handleSingUp, handleSingIn} from "../../firebase";
 
 export function SignUpScreen(){
 
@@ -9,6 +11,22 @@ export function SignUpScreen(){
     const [commerceName, setCommerceName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassoword, setConfirmPassoword] = useState("");
+
+    const checkedPassword = (password, confirmPassword) => { password === confirmPassword ?  true : false }
+
+    
+
+    const onPress = () => {
+
+        if(checkedPassword){
+
+            handleSingUp(email, password, commerceName, name);
+
+        }
+
+        
+    }
+    
 
     return(
     <>
@@ -30,8 +48,8 @@ export function SignUpScreen(){
                 <TextInput
                     style={s.input}
                     placeholder="Crackner Lassard"
-                    value = {email}
-                    onChangeText={text => setEmail(text)}
+                    value = {name}
+                    onChangeText={text => setName(text)}
                 />
             </View>
             <View style={s.inputContent}>
@@ -41,8 +59,8 @@ export function SignUpScreen(){
                 <TextInput
                     style={s.input}
                     placeholder="Commerce Shop"
-                    value = {email}
-                    onChangeText={text => setEmail(text)}
+                    value = {commerceName}
+                    onChangeText={text => setCommerceName(text)}
                 />
             </View>
             <View style={s.inputContent}>
@@ -80,8 +98,8 @@ export function SignUpScreen(){
                 <TextInput
                     style={s.input}
                     placeholder="Confirmar senha"
-                    value = {password}
-                    onChangeText={text => setPassword(text)}
+                    value = {confirmPassoword}
+                    onChangeText={text => setConfirmPassoword(text)}
                     autoCapitalize="none"
                     secureTextEntry
                     textContentType="password"
@@ -93,6 +111,7 @@ export function SignUpScreen(){
     <View style={s.btnView}>
         <TouchableOpacity
             style={s.btnLogin}
+            onPress={() => onPress()}
         >
             <Text style={s.btnTxt}>
                 Finalizar Cadastro

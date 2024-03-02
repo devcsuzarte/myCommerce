@@ -34,8 +34,8 @@ export const s = StyleSheet.create({
     
     inputTitle: {
     
-        margin: 10,
-        fontSize: 15,
+        margin: 5,
+        fontSize: 16,
         fontWeight: "bold",
     
         },

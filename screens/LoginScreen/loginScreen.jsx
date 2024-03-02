@@ -25,7 +25,7 @@ export function LoginScreen({ navigation }) {
     const singUp = () => {
 
         handleSingUp(email, password);
-        
+
         
     }
 
