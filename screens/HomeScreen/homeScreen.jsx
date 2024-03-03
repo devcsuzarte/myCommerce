@@ -10,10 +10,13 @@ import { getDocs, collection } from "firebase/firestore";
 
 
 
-export function HomeScreen({ navigation }){
+export function HomeScreen({ navigation, route }){
 
     const [itemsList, setItemsList] = useState([]);
     const [inputSearch, setInputSearch] = useState("");
+    const dbID = route.params.dbId
+
+    console.log(dbID);
 
     const handleSingOut = () => {
 

@@ -12,15 +12,18 @@ export function SignUpScreen(){
     const [password, setPassword] = useState("");
     const [confirmPassoword, setConfirmPassoword] = useState("");
 
-    const checkedPassword = (password, confirmPassword) => { password === confirmPassword ?  true : false }
-
     
+
 
     const onPress = () => {
 
-        if(checkedPassword){
+        if(password == confirmPassoword){
 
             handleSingUp(email, password, commerceName, name);
+
+        } else {
+
+            console.log("WRONG");
 
         }
 
