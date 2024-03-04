@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { db } from "../../firebase";
 import { getDocs, collection } from "firebase/firestore"; 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 
 
 
@@ -14,9 +17,26 @@ export function HomeScreen({ navigation, route }){
 
     const [itemsList, setItemsList] = useState([]);
     const [inputSearch, setInputSearch] = useState("");
-    const dbID = route.params.dbId
+    const [dbID, setDbID] = useState(null)
 
-    console.log(dbID);
+    const getDataLocal = async () => {
+
+        try {
+          const value = await AsyncStorage.getItem('my-key');
+          if (value !== null) {
+           setDbID(value)
+          }
+        } catch (e) {
+            console.log(e)
+        }
+      };
+
+      useEffect(() => {
+
+        getDataLocal();
+        console.log(dbID);
+
+    }, [])
 
     const handleSingOut = () => {
 
@@ -114,6 +134,11 @@ export function HomeScreen({ navigation, route }){
                             onPress={handleSingOut}
                         >
                             <AntDesign name="logout" size={25} color="white"/>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => console.log(dbID)}
+                        >
+                            <AntDesign name="logout" size={25} color="black"/>
                         </TouchableOpacity>
                     </View>
 

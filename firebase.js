@@ -5,7 +5,7 @@ import { doc, query, where, addDoc, getDocs, collection, updateDoc } from "fireb
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -35,17 +35,27 @@ const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
 
+const storeData = async (value) => {
+  try {
+    await AsyncStorage.setItem('my-key', value);
+  } catch (e) {
+    console.log(e)
+  }
+};
+
 
 
 const handleSingUp = (email, password, commerce, name) => {
 
-  console.log(`${email} ----- ${password}`);
+  //console.log(`${email} ----- ${password}`);
 
   createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
     setUser(name, commerce, email);
+    console.log(email+"#items")
+    storeData(String(email+"#items"))
     // ...
   })
   .catch((error) => {
@@ -65,6 +75,7 @@ signInWithEmailAndPassword(auth, email, password)
     const user = userCredential.user;
     // ...
     console.log(`${email} -- login`)
+    storeData(String(email+"#items"))
     return true;
   })
   .catch((error) => {
