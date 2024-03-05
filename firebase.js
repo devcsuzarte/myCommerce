@@ -35,11 +35,26 @@ const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
 
+// store db key
 const storeData = async (value) => {
   try {
     await AsyncStorage.setItem('my-key', value);
   } catch (e) {
     console.log(e)
+  }
+};
+
+// reading Db key
+
+export const getDbID = async () => {
+  try {
+    const value = await AsyncStorage.getItem('my-key');
+    if (value !== null) {
+      //console.log(`inside ${value}`)
+      return value
+    }
+  } catch (e) {
+    console.log(`ERRO GETDATA ${e}`)
   }
 };
 
@@ -54,7 +69,7 @@ const handleSingUp = (email, password, commerce, name) => {
     // Signed up 
     const user = userCredential.user;
     setUser(name, commerce, email);
-    console.log(email+"#items")
+    //console.log(email+"#items")
     storeData(String(email+"#items"))
     // ...
   })
@@ -113,10 +128,12 @@ async function setUser(userName, commerceName, userEmail) {
 
 
 
-async function setItem(itemTitle, itemAmount, itemPrice, itemDescription){
+async function setItem(itemTitle, itemAmount, itemPrice, itemDescription, dbID){
+
+  console.log(`INSIDE SETITEM FUNC ${dbID}`);
 
   try {
-      const docRef = await addDoc(collection(db, "items"), {
+      const docRef = await addDoc(collection(db, dbID), {
         
         title: itemTitle,
         amount: itemAmount,

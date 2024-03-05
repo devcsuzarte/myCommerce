@@ -7,36 +7,30 @@ import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { db } from "../../firebase";
 import { getDocs, collection } from "firebase/firestore"; 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getDbID } from "../../firebase";
+import { disableErrorHandling } from "expo";
 
 
-
-
-
-export function HomeScreen({ navigation, route }){
+export function HomeScreen({ navigation }){
 
     const [itemsList, setItemsList] = useState([]);
     const [inputSearch, setInputSearch] = useState("");
-    const [dbID, setDbID] = useState(null)
+//    const [dbID, setDbID] = useState(showID());
+    
 
-    const getDataLocal = async () => {
+//     function showID() {
 
-        try {
-          const value = await AsyncStorage.getItem('my-key');
-          if (value !== null) {
-           setDbID(value)
-          }
-        } catch (e) {
-            console.log(e)
-        }
-      };
+//         getDbID().then(x => 
+//             {
+//                 console.log(`out ${x}`);
+//                 setDbID(x);
+//                 return x
+//             });
+//     }
 
-      useEffect(() => {
+//     //showID();
 
-        getDataLocal();
-        console.log(dbID);
 
-    }, [])
 
     const handleSingOut = () => {
 
@@ -72,9 +66,10 @@ export function HomeScreen({ navigation, route }){
        
     }    
 
-    async function getItems(){
-
-        const querySnapshot = await getDocs(collection(db, "items"));
+    async function getItems(dbID){
+        
+        console.log(`INSIDE FUNCTION DBID ${dbID}`)
+        const querySnapshot = await getDocs(collection(db, dbID));
         const items = [];
       
         querySnapshot.forEach((doc) => {
@@ -95,7 +90,14 @@ export function HomeScreen({ navigation, route }){
     useEffect(() => {
 
         const unsubscribe = navigation.addListener('focus', () => {
-            getItems();
+
+            getDbID().then(x => 
+                {
+                   console.log(`dentro do get items ${x}`)
+                   getItems(x);
+                });
+
+            
           });
 
           return unsubscribe;
@@ -136,7 +138,7 @@ export function HomeScreen({ navigation, route }){
                             <AntDesign name="logout" size={25} color="white"/>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => console.log(dbID)}
+                            
                         >
                             <AntDesign name="logout" size={25} color="black"/>
                         </TouchableOpacity>

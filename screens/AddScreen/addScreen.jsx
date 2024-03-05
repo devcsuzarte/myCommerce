@@ -3,7 +3,7 @@ import { s } from "./addScreen.style";
 import { useState } from "react";
 import { setItem } from "../../firebase";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-
+import { getDbID } from "../../firebase";
 
 export function AddScreen({ navigation }){
 
@@ -14,11 +14,13 @@ const [itemDescription, setItemDescription] = useState('none');
 
 const onPress = () => {
 
-    console.log(itemTitle, itemAmount, itemPrice, itemDescription);
-    setItem(itemTitle, itemAmount, itemPrice, itemDescription);
-    navigation.replace('Home');
+    getDbID().then(x => {
 
+        console.log(itemTitle, itemAmount, itemPrice, itemDescription, x);
+        setItem(itemTitle, itemAmount, itemPrice, itemDescription, x);
+        navigation.replace('Home');
 
+    });
 
 }
 
