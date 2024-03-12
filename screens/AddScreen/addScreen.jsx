@@ -3,24 +3,26 @@ import { s } from "./addScreen.style";
 import { useState } from "react";
 import { setItem } from "../../firebase";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { getDbID } from "../../firebase";
 
-export function AddScreen({ navigation }){
+
+export function AddScreen({ navigation, route }){
 
 const [itemTitle, setItemTitle] = useState('none');
 const [itemAmount, setItemAmount] = useState('none');
 const [itemPrice, setItemPrice] = useState('none');
 const [itemDescription, setItemDescription] = useState('none');
+const [userID, SetUserID]= useState(route.params.dbID)
+    let dbItemsID = userID + "#items"
 
 const onPress = () => {
 
-    getDbID().then(x => {
-
-        console.log(itemTitle, itemAmount, itemPrice, itemDescription, x);
-        setItem(itemTitle, itemAmount, itemPrice, itemDescription, x);
-        navigation.replace('Home');
-
+    console.log(itemTitle, itemAmount, itemPrice, itemDescription);
+    setItem(itemTitle, itemAmount, itemPrice, itemDescription, dbItemsID);
+    navigation.replace('Home', {
+        dbID: userID
     });
+
+
 
 }
 

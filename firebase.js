@@ -5,7 +5,7 @@ import { doc, query, where, addDoc, getDocs, collection, updateDoc } from "fireb
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -35,42 +35,17 @@ const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
 
-// store db key
-const storeData = async (value) => {
-  try {
-    await AsyncStorage.setItem('my-key', value);
-  } catch (e) {
-    console.log(e)
-  }
-};
-
-// reading Db key
-
-export const getDbID = async () => {
-  try {
-    const value = await AsyncStorage.getItem('my-key');
-    if (value !== null) {
-      //console.log(`inside ${value}`)
-      return value
-    }
-  } catch (e) {
-    console.log(`ERRO GETDATA ${e}`)
-  }
-};
-
 
 
 const handleSingUp = (email, password, commerce, name) => {
 
-  //console.log(`${email} ----- ${password}`);
+  console.log(`${email} ----- ${password}`);
 
   createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
     setUser(name, commerce, email);
-    //console.log(email+"#items")
-    storeData(String(email+"#items"))
     // ...
   })
   .catch((error) => {
@@ -90,7 +65,6 @@ signInWithEmailAndPassword(auth, email, password)
     const user = userCredential.user;
     // ...
     console.log(`${email} -- login`)
-    storeData(String(email+"#items"))
     return true;
   })
   .catch((error) => {
@@ -128,12 +102,10 @@ async function setUser(userName, commerceName, userEmail) {
 
 
 
-async function setItem(itemTitle, itemAmount, itemPrice, itemDescription, dbID){
-
-  console.log(`INSIDE SETITEM FUNC ${dbID}`);
+async function setItem(itemTitle, itemAmount, itemPrice, itemDescription, dbItemID){
 
   try {
-      const docRef = await addDoc(collection(db, dbID), {
+      const docRef = await addDoc(collection(db, dbItemID), {
         
         title: itemTitle,
         amount: itemAmount,
@@ -154,9 +126,9 @@ async function setItem(itemTitle, itemAmount, itemPrice, itemDescription, dbID){
 
 // Update Item
 
-async function updateItem(itemId, itemTitle, itemAmount, itemPrice, itemDescription){
+async function updateItem(itemId, itemTitle, itemAmount, itemPrice, itemDescription, dbItemID){
 
-  const itemsRef = doc(db, "items", itemId);
+  const itemsRef = doc(db, dbItemID, itemId);
 
   // Set the "capital" field of the city 'DC'
   await updateDoc(itemsRef, {
@@ -171,10 +143,10 @@ async function updateItem(itemId, itemTitle, itemAmount, itemPrice, itemDescript
 // send sell
 
 
-async function setSell(sellSummary, sellTotalPrice){
+async function setSell(sellSummary, sellTotalPrice, dbSellsID){
 
   try {
-      const docRef = await addDoc(collection(db, "sells"), {
+      const docRef = await addDoc(collection(db, dbSellsID), {
         
         buyTime: new Date().toLocaleString(),
         summary: sellSummary,
@@ -191,9 +163,9 @@ async function setSell(sellSummary, sellTotalPrice){
 
 // update stock
 
-async function updateStock(itemId, amountUpdated){
+async function updateStock(itemId, dbItemsID, amountUpdated){
 
-  const itemsRef = doc(db, "items", itemId);
+  const itemsRef = doc(db, dbItemsID, itemId);
 
   // Set the "capital" field of the city 'DC'
   await updateDoc(itemsRef, {

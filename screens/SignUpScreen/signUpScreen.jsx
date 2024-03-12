@@ -18,7 +18,7 @@ export function SignUpScreen(){
     const onPress = () => {
 
         if(password == confirmPassoword){
-            
+
             handleSingUp(email, password, commerceName, name);
 
         } else {

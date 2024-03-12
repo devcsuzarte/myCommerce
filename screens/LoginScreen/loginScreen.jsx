@@ -15,15 +15,25 @@ export function LoginScreen({ navigation }) {
 
       const unsubscribe =  auth.onAuthStateChanged(user => {
             if (user) {
-                      
-                navigation.replace('Home', {
+
+                navigation.navigate('Home', {
+
+                    dbID: user.uid,
+            
                 })
+                
             }
         })
 
         return unsubscribe;
     }, []);
 
+
+    const goToHome = (userEmail) => {
+
+        
+
+    }
 
     const singUp = () => {
 
@@ -35,7 +45,6 @@ export function LoginScreen({ navigation }) {
     const singIn = () => {
 
         handleSingIn(email, password);
-       // goToHome(email);
     }
 
     return (

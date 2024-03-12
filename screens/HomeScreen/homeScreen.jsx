@@ -3,35 +3,19 @@ import { FontAwesome, SimpleLineIcons, AntDesign, MaterialIcons } from '@expo/ve
 import { s } from "./homeScreen.style";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { ItemCard } from "../../components/itemCard/itemCard";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { auth } from "../../firebase";
 import { db } from "../../firebase";
 import { getDocs, collection } from "firebase/firestore"; 
-import { getDbID } from "../../firebase";
-import { disableErrorHandling } from "expo";
 
 
-export function HomeScreen({ navigation }){
+
+export function HomeScreen({ navigation, route }){
 
     const [itemsList, setItemsList] = useState([]);
-    const [inputSearch, setInputSearch] = useState("");
-//    const [dbID, setDbID] = useState(showID());
+    const [userID, SetUserID]= useState(route.params.dbID)
+    let dbItemsID = userID + "#items"
     
-
-//     function showID() {
-
-//         getDbID().then(x => 
-//             {
-//                 console.log(`out ${x}`);
-//                 setDbID(x);
-//                 return x
-//             });
-//     }
-
-//     //showID();
-
-
-
     const handleSingOut = () => {
 
         auth
@@ -66,10 +50,10 @@ export function HomeScreen({ navigation }){
        
     }    
 
-    async function getItems(dbID){
-        
-        console.log(`INSIDE FUNCTION DBID ${dbID}`)
-        const querySnapshot = await getDocs(collection(db, dbID));
+    async function getItems(){
+
+        console.log(` GET FROM GETITEMS ${dbItemsID}`)
+        const querySnapshot = await getDocs(collection(db, dbItemsID));
         const items = [];
       
         querySnapshot.forEach((doc) => {
@@ -90,14 +74,7 @@ export function HomeScreen({ navigation }){
     useEffect(() => {
 
         const unsubscribe = navigation.addListener('focus', () => {
-
-            getDbID().then(x => 
-                {
-                   console.log(`dentro do get items ${x}`)
-                   getItems(x);
-                });
-
-            
+            getItems();
           });
 
           return unsubscribe;
@@ -119,6 +96,7 @@ export function HomeScreen({ navigation }){
             amount: amount,
             price: price,
             description: description,
+            dbID: userID
         });
     }
 
@@ -136,11 +114,6 @@ export function HomeScreen({ navigation }){
                             onPress={handleSingOut}
                         >
                             <AntDesign name="logout" size={25} color="white"/>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            
-                        >
-                            <AntDesign name="logout" size={25} color="black"/>
                         </TouchableOpacity>
                     </View>
 
@@ -208,6 +181,7 @@ export function HomeScreen({ navigation }){
                         <TouchableOpacity
                             style={s.btn}
                             onPress={() => navigation.navigate('Buy', {
+                                dbID: userID,
                                 itemList: itemsList
                             })}
                         >
@@ -219,7 +193,9 @@ export function HomeScreen({ navigation }){
 
                         <TouchableOpacity
                             style={s.btn}
-                            onPress={() => navigation.navigate('Add')}
+                            onPress={() => navigation.navigate('Add', {
+                                dbID: userID,
+                            })}
                         >
                         <MaterialIcons name="add-circle-outline" size={30} color="black" />      
                         <Text style={s.btnTxt}>
@@ -229,7 +205,9 @@ export function HomeScreen({ navigation }){
                     
                         <TouchableOpacity
                             style={s.btn}
-                            onPress={() => navigation.navigate('Records')}
+                            onPress={() => navigation.navigate('Records', {
+                                dbID: userID,
+                            })}
                         >
                         <MaterialIcons name="history" size={30} color="black" />
                         <Text style={s.btnTxt}>

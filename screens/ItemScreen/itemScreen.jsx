@@ -6,25 +6,6 @@ import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import Dialog from "react-native-dialog";
 
-async function updateItem(itemId, itemTitle, itemAmount, itemPrice, itemDescription){
-
-    const itemsRef = doc(db, "items", itemId);
-
-    await updateDoc(itemsRef, {
-        title: itemTitle,
-        amount: itemAmount,
-        price: itemPrice,
-        description: itemDescription,
-    });
-
-}
-
-async function deleteItem(itemId){
-
-    await deleteDoc(doc(db, "items", itemId));
-    
-}
-
 export function ItemScreen({ navigation, route }){
 
     const [itemTitle, setItemTitle] = useState(route.params.title);
@@ -32,6 +13,29 @@ export function ItemScreen({ navigation, route }){
     const [itemPrice, setItemPrice] = useState((route.params.price).toString());
     const [itemDescription, setItemDescription] = useState(route.params.description);
     const [visibleDeleteDiolog, setVisibleDeleteDialog] = useState(false);
+    const [userID, SetUserID]= useState(route.params.dbID)
+    let dbItemsID = userID + "#items"
+
+    async function updateItem(itemId, itemTitle, itemAmount, itemPrice, itemDescription, dbID){
+
+        const itemsRef = doc(db, dbID, itemId);
+    
+        await updateDoc(itemsRef, {
+            title: itemTitle,
+            amount: itemAmount,
+            price: itemPrice,
+            description: itemDescription,
+        });
+    
+    }
+    
+    async function deleteItem(itemId, dbID){
+        
+        console.log(`FROM DELETE ${dbItemsID}`)
+        await deleteDoc(doc(db, dbID, itemId));
+        
+    }
+    
 
     return (
         <TouchableWithoutFeedback
@@ -52,7 +56,7 @@ export function ItemScreen({ navigation, route }){
                         </Dialog.Description>
                         <Dialog.Button label="Cancelar" onPress={() => setVisibleDeleteDialog(false)}/>
                         <Dialog.Button label="Deletar" onPress={() => {
-                            deleteItem(route.params.id)        
+                            deleteItem(route.params.id, dbItemsID)        
                             navigation.pop();
                         }}/>
                         </Dialog.Container>
@@ -116,7 +120,8 @@ export function ItemScreen({ navigation, route }){
                             itemTitle, 
                             itemAmount, 
                             itemPrice, 
-                            itemDescription);
+                            itemDescription,
+                            dbItemsID);
                             
                             navigation.pop();
                         }

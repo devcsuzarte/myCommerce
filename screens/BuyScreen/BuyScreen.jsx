@@ -17,10 +17,13 @@ export function BuyScreen({ navigation, route }){
     const [cart, setCart] = useState([]);
     const [selected, setSelected] = useState(notCheck);
     const [showSummary, setShowSummary] = useState(false);
+    const [userID, SetUserID]= useState(route.params.dbID)
+    let dbItemsID = userID + "#items"
+    let dbSellsID = userID + "#sells"
 
     async function getItems(){
 
-        const querySnapshot = await getDocs(collection(db, "items"));
+        const querySnapshot = await getDocs(collection(db, dbItemsID));
         const items = [];
       
         querySnapshot.forEach((doc) => {
@@ -126,7 +129,7 @@ export function BuyScreen({ navigation, route }){
     
                 }
                 
-                updateStock(item.id, item.amount - item.total);
+                updateStock(item.id, dbItemsID, item.amount - item.total);
                 console.log(item.id);
                 console.log(Number(item.amount - item.total));
                 totalPrice = Number(totalPrice) + (Number(item.price) * item.total);
@@ -145,7 +148,7 @@ export function BuyScreen({ navigation, route }){
             console.log(sentToDb);
             console.log(totalPrice);
     
-            setSell(sentToDb, totalPrice);
+            setSell(sentToDb, totalPrice, dbSellsID);
         }
 
 

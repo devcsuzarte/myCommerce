@@ -12,15 +12,17 @@ import { getDocs, collection } from "firebase/firestore";
 
 
 
-export function RecordsScreen({ navigation }){
+export function RecordsScreen({ navigation, route }){
 
     const [records, setRecords] = useState([]);
     const [summary, setSummary] = useState([]);
+    const [userID, SetUserID]= useState(route.params.dbID)
+    let dbSellsID = userID + "#sells"
 
 
     async function getRecords(){
 
-        const querySnapshot = await getDocs(collection(db, "sells"));
+        const querySnapshot = await getDocs(collection(db, dbSellsID));
         const recordsList = [];
       
         querySnapshot.forEach((doc) => {
