@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TextInput, TouchableOpacity, View, Text, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform} from "react-native";
+import { TextInput, TouchableOpacity, View, Text, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform, Modal} from "react-native";
 import { s } from "./loginScreen.style";
 import { auth, handleSingUp, handleSingIn} from "../../firebase";
 import { Entypo } from '@expo/vector-icons';
@@ -44,7 +44,7 @@ export function LoginScreen({ navigation }) {
 
     const singIn = () => {
 
-        handleSingIn(email, password);
+        console.log(handleSingIn(email, password));
     }
 
     return (

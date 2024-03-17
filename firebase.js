@@ -5,6 +5,8 @@ import { doc, query, where, addDoc, getDocs, collection, updateDoc } from "fireb
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import React from 'react';
+import { Alert } from 'react-native';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -17,6 +19,23 @@ const firebaseConfig = {
   appId: "1:985686771142:web:21924e798d02a089539ec7",
   measurementId: "G-BKP9LCKXHT"
 };
+
+const signInError = (getErroCode) =>
+    Alert.alert('Erro ao fazer login', getErroCode, [
+      {
+        text: 'Ok',
+        onPress: () => console.log('Ok'),
+      },
+    ]);
+
+const signUpError = (getErroCode) =>
+  Alert.alert('Erro ao fazer cadastro', getErroCode, [
+    {
+      text: 'Ok',
+      onPress: () => console.log('Ok'),
+    },
+    ]);
+    
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -52,6 +71,7 @@ const handleSingUp = (email, password, commerce, name) => {
     const errorCode = error.code;
     const errorMessage = error.message;
 
+    signUpError(errorMessage)
     console.log(errorMessage)
     // ..
   });
@@ -70,8 +90,9 @@ signInWithEmailAndPassword(auth, email, password)
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-
-    //console.log(errorCode)
+    
+    signUpError1(errorMessage);
+    console.log(errorCode)
   });
 }
 
