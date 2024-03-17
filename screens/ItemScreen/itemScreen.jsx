@@ -6,6 +6,8 @@ import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import Dialog from "react-native-dialog";
 
+
+
 export function ItemScreen({ navigation, route }){
 
     const [itemTitle, setItemTitle] = useState(route.params.title);
@@ -13,10 +15,11 @@ export function ItemScreen({ navigation, route }){
     const [itemPrice, setItemPrice] = useState((route.params.price).toString());
     const [itemDescription, setItemDescription] = useState(route.params.description);
     const [visibleDeleteDiolog, setVisibleDeleteDialog] = useState(false);
-    const [userID, SetUserID]= useState(route.params.dbID)
-    let dbItemsID = userID + "#items"
+    const [userItemsID, setUserItemsID]= useState(route.params.dbID)
 
-    async function updateItem(itemId, itemTitle, itemAmount, itemPrice, itemDescription, dbID){
+    async function updateItem(itemId, itemTitle, itemAmount, itemPrice, itemDescription){
+
+        const dbID = userItemsID + "#items"
 
         const itemsRef = doc(db, dbID, itemId);
     
@@ -29,13 +32,12 @@ export function ItemScreen({ navigation, route }){
     
     }
     
-    async function deleteItem(itemId, dbID){
-        
-        console.log(`FROM DELETE ${dbItemsID}`)
+    async function deleteItem(itemId){
+
+        const dbID = userItemsID + "#items"
         await deleteDoc(doc(db, dbID, itemId));
         
     }
-    
 
     return (
         <TouchableWithoutFeedback
@@ -56,7 +58,7 @@ export function ItemScreen({ navigation, route }){
                         </Dialog.Description>
                         <Dialog.Button label="Cancelar" onPress={() => setVisibleDeleteDialog(false)}/>
                         <Dialog.Button label="Deletar" onPress={() => {
-                            deleteItem(route.params.id, dbItemsID)        
+                            deleteItem(route.params.id)        
                             navigation.pop();
                         }}/>
                         </Dialog.Container>
@@ -120,8 +122,7 @@ export function ItemScreen({ navigation, route }){
                             itemTitle, 
                             itemAmount, 
                             itemPrice, 
-                            itemDescription,
-                            dbItemsID);
+                            itemDescription);
                             
                             navigation.pop();
                         }

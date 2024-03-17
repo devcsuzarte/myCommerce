@@ -91,7 +91,7 @@ signInWithEmailAndPassword(auth, email, password)
     const errorCode = error.code;
     const errorMessage = error.message;
     
-    signUpError1(errorMessage);
+    signInError(errorMessage);
     console.log(errorCode)
   });
 }
