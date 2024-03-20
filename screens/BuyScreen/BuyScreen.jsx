@@ -1,5 +1,5 @@
 import { FlatList, Text, TextInput, TouchableOpacity, View, TouchableWithoutFeedback, Keyboard, Modal } from "react-native";
-import { FontAwesome, FontAwesome5, MaterialCommunityIcons, SimpleLineIcons } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5, MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { s } from "./BuyScreen.style";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import { db } from "../../firebase";
 import { getDocs, collection, sum } from "firebase/firestore"; 
 import { BuyItem } from "../../components/buyItem/buyItem";
 import { SellItem, sellItem } from "../../components/sellItem/sellItem"
+//  <SimpleLineIcons name="arrow-right" size={24} color="#6CA0FF" />
 
 export function BuyScreen({ navigation, route }){
 
@@ -161,6 +162,11 @@ export function BuyScreen({ navigation, route }){
                 <View
                     style={s.header}
                 >
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}                    
+                    >
+                    <AntDesign name="left" size={28} style={s.headerBtn} />
+                    </TouchableOpacity>  
                     <Text
                         style={s.headerTxt}                    
                     >
@@ -169,7 +175,7 @@ export function BuyScreen({ navigation, route }){
                     <TouchableOpacity
                         onPress={onPress}                    
                     >
-                    <MaterialCommunityIcons name="cart-arrow-right" size={30} color="white" />
+                    <MaterialCommunityIcons name="cart-arrow-right" size={30} style={s.headerBtn} />
                     </TouchableOpacity>
                 </View>
 
@@ -251,7 +257,7 @@ export function BuyScreen({ navigation, route }){
                     </Modal>
     
                     <View style={s.titleView}>
-                    <SimpleLineIcons name="arrow-right" size={24} color="#6CA0FF" />
+                    <AntDesign name="bars" size={24} color="#6CA0FF"/>
                     <Text style={s.title}>Clique para selecionar</Text>
                     </View>
                         

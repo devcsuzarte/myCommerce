@@ -102,21 +102,27 @@ export const s = StyleSheet.create({
    header: {
     
     flexDirection: "row",
-    alignItems: "center",
-    alignContent: "space-between",
-
+    //alignItems: "center",
+    
+    justifyContent: "space-between",
     backgroundColor: "#1789fc",
     
     paddingTop: 50,
     paddingBottom: 10,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
 
+    },
+
+    headerBtn: {
+
+      color: "white",
+      flex: 1,
     },
 
    headerTxt: {
 
-     flex: 1,
-     fontSize: 25,
+     //flex: 10,
+     fontSize: 22,
      color: "white",
     },
 

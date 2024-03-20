@@ -3,6 +3,7 @@ import { s } from "./addScreen.style";
 import { useState } from "react";
 import { setItem } from "../../firebase";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { FontAwesome, FontAwesome5, MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
 
 export function AddScreen({ navigation, route }){
@@ -26,15 +27,34 @@ const onPress = () => {
 
 }
 
+const cleanFieldsPressed = () => {
+
+    setItemTitle("")
+}
+
 
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <>
-                <View style={s.header}>
-                        <Text style={s.headerTxt}>
-                            Adicionar item
-                        </Text>
+            <View
+                    style={s.header}
+                >
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}                    
+                    >
+                    <AntDesign name="left" size={28} style={s.headerBtn} />
+                    </TouchableOpacity>  
+                    <Text
+                        style={s.headerTxt}                    
+                    >
+                        Adicionar Item
+                    </Text>
+                    <Text
+                        onPress={cleanFieldsPressed}
+                    >
+                    <FontAwesome name="trash-o" size={28} color="#1789fc" />
+                    </Text>
                 </View>
                 <View style={s.root}>
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>

@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, TextInput, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, ScrollView, Keyboard } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { FontAwesome, FontAwesome5, MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 import { s } from "./itemScreen.style";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
@@ -43,12 +43,23 @@ export function ItemScreen({ navigation, route }){
         <TouchableWithoutFeedback
         onPress={Keyboard.dismiss}>
             <>
-            <View style={s.header}>
-                        <Text
-                        style={s.headerTxt}>
-                            Clique no campo para editar
-                        </Text>
-                    </View>
+            <View
+                    style={s.header}
+                >
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}                    
+                    >
+                    <AntDesign name="left" size={28} style={s.headerBtn} />
+                    </TouchableOpacity>  
+                    <Text
+                        style={s.headerTxt}                    
+                    >
+                        Editar Item
+                    </Text>
+                    <Text>
+                    <FontAwesome name="trash-o" size={28} color="#1789fc" />
+                    </Text>
+            </View>
                 <View style={s.root}>
                     <View>
                         <Dialog.Container visible={visibleDeleteDiolog}>

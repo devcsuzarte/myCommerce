@@ -12,21 +12,27 @@ export const s = StyleSheet.create({
     header: {
     
         flexDirection: "row",
-        alignItems: "center",
-        alignContent: "space-between",
-    
+        //alignItems: "center",
+        
+        justifyContent: "space-between",
         backgroundColor: "#1789fc",
         
         paddingTop: 50,
         paddingBottom: 10,
-        paddingHorizontal: 10,
-     
+        paddingHorizontal: 5,
+    
+        },
+    
+        headerBtn: {
+    
+          color: "white",
+          flex: 1,
         },
     
        headerTxt: {
     
-         flex: 1,
-         fontSize: 25,
+         //flex: 10,
+         fontSize: 22,
          color: "white",
         },
 
@@ -42,7 +48,7 @@ export const s = StyleSheet.create({
 
     title: {
 
-        margin: 10,
+        margin: 0,
 
         fontSize: 17,
         fontWeight: "bold",
@@ -52,8 +58,8 @@ export const s = StyleSheet.create({
     input: {
 
         backgroundColor: "white",
-        padding: 20,
-        borderRadius: 7,
+        padding: 15,
+        borderRadius: 5,
         marginVertical: 15,
 
         fontSize: 15,

@@ -54,11 +54,23 @@ export function RecordsScreen({ navigation, route }){
     return(
         
             <>
-            <View style={s.header}>
-                <Text
-                    style={s.headerTxt}
-                >Histórico de Vendas</Text>
-            </View>
+                <View
+                    style={s.header}
+                >
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}                    
+                    >
+                    <AntDesign name="left" size={28} style={s.headerBtn} />
+                    </TouchableOpacity>  
+                    <Text
+                        style={s.headerTxt}                    
+                    >
+                        Histórico de Vendas
+                    </Text>
+                    <Text>
+                    <FontAwesome name="trash-o" size={28} color="#1789fc" />
+                    </Text>
+                </View>
 
                 <View style={s.root}>
                         <FlatList

@@ -11,19 +11,31 @@ export const s = StyleSheet.create({
    },
 
    header: {
-
-    backgroundColor: "#1789fc", 
+    
+    flexDirection: "row",
+    //alignItems: "center",
+    
+    justifyContent: "space-between",
+    backgroundColor: "#1789fc",
+    
     paddingTop: 50,
     paddingBottom: 10,
-    paddingHorizontal: 10,
- 
+    paddingHorizontal: 5,
+
     },
 
-    headerTxt: {
-      
-      fontSize: 25,
+    headerBtn: {
+
       color: "white",
-     },
+      flex: 1,
+    },
+
+   headerTxt: {
+
+     //flex: 10,
+     fontSize: 22,
+     color: "white",
+    },
 
     salesList: {
 
