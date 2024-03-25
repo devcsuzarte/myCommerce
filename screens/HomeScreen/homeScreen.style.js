@@ -108,23 +108,15 @@ export const s = StyleSheet.create({
      flexDirection: "row",
      justifyContent: "space-between",
 
-     backgroundColor: "white",
+     backgroundColor: "#1789fc",
 
      paddingVertical: 10,
      paddingHorizontal: 22,
-     marginHorizontal: 35,
+     marginHorizontal: 70,
      marginBottom: 25,
      borderRadius: 50,
 
-      shadowColor: "#000",
-      shadowOffset: {
-      width: 0,
-      height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-
-        elevation: 3,
+     //borderWidth: 0.1,
 
    },
 
@@ -134,12 +126,7 @@ export const s = StyleSheet.create({
     backgroundColor: "transparent",
 
     alignSelf: "flex-end",
-
     marginTop: "auto",
-    marginBottom: 10,
-    marginEnd: 20,
-     
-    
 
    },
 
@@ -152,8 +139,9 @@ export const s = StyleSheet.create({
 
    btnTxt: {
 
-     marginTop: 8,
+     marginTop: 1,
      fontSize: 12,
+     color: "#f5f5f5",
 
    },
 

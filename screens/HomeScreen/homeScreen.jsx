@@ -185,7 +185,7 @@ export function HomeScreen({ navigation, route }){
                                 itemList: itemsList
                             })}
                         >
-                        <MaterialIcons name="arrow-circle-up" size={30} color="black" />
+                        <MaterialIcons name="arrow-circle-up" size={30} color="white" />
                         <Text style={s.btnTxt}>
                             Venda
                         </Text>
@@ -197,7 +197,7 @@ export function HomeScreen({ navigation, route }){
                                 dbID: userID,
                             })}
                         >
-                        <MaterialIcons name="add-circle-outline" size={30} color="black" />      
+                        <MaterialIcons name="add-circle-outline" size={30} color="white" />      
                         <Text style={s.btnTxt}>
                             Adicionar
                         </Text>
@@ -209,7 +209,7 @@ export function HomeScreen({ navigation, route }){
                                 dbID: userID,
                             })}
                         >
-                        <MaterialIcons name="history" size={30} color="black" />
+                        <MaterialIcons name="history" size={30} color="white" />
                         <Text style={s.btnTxt}>
                             Histórico
                         </Text>

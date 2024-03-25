@@ -1,10 +1,11 @@
 import { View, Text, TextInput, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, TouchableOpacity, Keyboard} from "react-native";
+import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import { s } from "./signUpScreen.style"
 import { useState } from "react";
 import { setUser } from "../../firebase";
 import { auth, handleSingUp, handleSingIn} from "../../firebase";
 
-export function SignUpScreen(){
+export function SignUpScreen({ navigation }){
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -34,7 +35,20 @@ export function SignUpScreen(){
     return(
     <>
         <View style={s.header}>
-            <Text style={s.headerTxt}>Cadastre-se</Text>
+        <TouchableOpacity
+                        onPress={() => navigation.goBack()}                    
+                    >
+                    <AntDesign name="left" size={28} style={s.headerBtn} />
+                    </TouchableOpacity>  
+                    <Text
+                        style={s.headerTxt}                    
+                    >
+                        Cadastre-se
+                    </Text>
+                    <Text
+                    >
+                    <FontAwesome name="trash-o" size={28} color="#1789fc" />
+                    </Text>
         </View>
     <TouchableWithoutFeedback 
         onPress={Keyboard.dismiss}>

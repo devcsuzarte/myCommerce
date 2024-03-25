@@ -20,13 +20,46 @@ const firebaseConfig = {
   measurementId: "G-BKP9LCKXHT"
 };
 
-const signInError = (getErroCode) =>
-    Alert.alert('Erro ao fazer login', getErroCode, [
-      {
-        text: 'Ok',
-        onPress: () => console.log('Ok'),
-      },
-    ]);
+
+
+const signInError = (getErroCode) => {
+
+  switch (getErroCode) {
+
+    case "auth/invalid-credential":
+    case "auth/invalid-email":
+
+      Alert.alert('Erro ao fazer login', "E-mail ou senha incorretos", [
+        {
+          text: 'Ok',
+          onPress: () => console.log('Ok'),
+        },
+      ]);
+      break;
+
+      case "auth/network-request-failed":
+
+          Alert.alert('Erro ao fazer login', "Verifique sua conexão com a internet", [
+            {
+              text: 'Ok',
+              onPress: () => console.log('Ok'),
+            },
+          ]);
+          break;
+
+      default:
+        Alert.alert('Erro ao fazer login', getErroCode, [
+          {
+            text: 'Ok',
+            onPress: () => console.log('Ok'),
+          },
+        ]);
+          break;
+
+  }
+
+
+    
 
 const signUpError = (getErroCode) =>
   Alert.alert('Erro ao fazer cadastro', getErroCode, [
@@ -35,6 +68,7 @@ const signUpError = (getErroCode) =>
       onPress: () => console.log('Ok'),
     },
     ]);
+  }
     
 
 // Initialize Firebase
@@ -71,8 +105,8 @@ const handleSingUp = (email, password, commerce, name) => {
     const errorCode = error.code;
     const errorMessage = error.message;
 
-    signUpError(errorMessage)
-    console.log(errorMessage)
+    signUpError(errorCode)
+    console.log(errorCode)
     // ..
   });
 }
@@ -91,7 +125,7 @@ signInWithEmailAndPassword(auth, email, password)
     const errorCode = error.code;
     const errorMessage = error.message;
     
-    signInError(errorMessage);
+    signInError(errorCode);
     console.log(errorCode)
   });
 }
@@ -194,6 +228,7 @@ async function updateStock(itemId, dbItemsID, amountUpdated){
   });
 
 }
+
 
 
 export { auth, handleSingUp, handleSingIn, setItem, setUser, updateItem, updateStock, sentError, setSell, db };
