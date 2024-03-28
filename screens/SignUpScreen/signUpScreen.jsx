@@ -4,29 +4,48 @@ import { s } from "./signUpScreen.style"
 import { useState } from "react";
 import { setUser } from "../../firebase";
 import { auth, handleSingUp, handleSingIn} from "../../firebase";
+import { Alert } from 'react-native';
 
 export function SignUpScreen({ navigation }){
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [commerceName, setCommerceName] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassoword, setConfirmPassoword] = useState("");
+    const [name, setName] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [commerceName, setCommerceName] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [confirmPassoword, setConfirmPassoword] = useState(null);
 
-    
+    const signInError = (error) => {
 
+        Alert.alert('Erro ao fazer login', error, [
+            {
+              text: 'Ok',
+              onPress: () => console.log('Ok'),
+            },
+          ]);
+
+      }
 
     const onPress = () => {
 
-        if(password == confirmPassoword){
-
-            handleSingUp(email, password, commerceName, name);
-
+        if((name == null || email == null) || commerceName == null){
+            signInError("Todos os campos devem ser preenchidos");
         } else {
 
-            console.log("WRONG");
+            if(password == confirmPassoword){
 
+                handleSingUp(email, password, commerceName, name);
+    
+            } else {
+    
+                console.log("WRONG");
+                signInError("Senhas não conferem")
+                
+    
+            }
         }
+
+
+        
 
         
     }

@@ -57,18 +57,22 @@ const signInError = (getErroCode) => {
           break;
 
   }
+}
 
 
     
 
 const signUpError = (getErroCode) =>
-  Alert.alert('Erro ao fazer cadastro', getErroCode, [
-    {
-      text: 'Ok',
-      onPress: () => console.log('Ok'),
-    },
-    ]);
-  }
+  {
+    Alert.alert('Erro ao fazer cadastro', getErroCode, [
+      {
+        text: 'Ok',
+        onPress: () => console.log('Ok'),
+      },
+      ]);
+    }
+  
+  
     
 
 // Initialize Firebase

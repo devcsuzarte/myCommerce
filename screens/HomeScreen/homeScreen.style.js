@@ -109,10 +109,11 @@ export const s = StyleSheet.create({
      justifyContent: "space-between",
 
      backgroundColor: "#1789fc",
+     opacity: 0.85,
 
      paddingVertical: 10,
-     paddingHorizontal: 22,
-     marginHorizontal: 70,
+     paddingHorizontal: 20,
+     marginHorizontal: 90,
      marginBottom: 25,
      borderRadius: 50,
 

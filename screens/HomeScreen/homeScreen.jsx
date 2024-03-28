@@ -185,10 +185,7 @@ export function HomeScreen({ navigation, route }){
                                 itemList: itemsList
                             })}
                         >
-                        <MaterialIcons name="arrow-circle-up" size={30} color="white" />
-                        <Text style={s.btnTxt}>
-                            Venda
-                        </Text>
+                        <MaterialIcons name="arrow-circle-up" size={40} color="white" />
                         </TouchableOpacity>
 
                         <TouchableOpacity
@@ -197,10 +194,7 @@ export function HomeScreen({ navigation, route }){
                                 dbID: userID,
                             })}
                         >
-                        <MaterialIcons name="add-circle-outline" size={30} color="white" />      
-                        <Text style={s.btnTxt}>
-                            Adicionar
-                        </Text>
+                        <MaterialIcons name="add-circle-outline" size={40} color="white" />      
                         </TouchableOpacity>
                     
                         <TouchableOpacity
@@ -209,10 +203,7 @@ export function HomeScreen({ navigation, route }){
                                 dbID: userID,
                             })}
                         >
-                        <MaterialIcons name="history" size={30} color="white" />
-                        <Text style={s.btnTxt}>
-                            Histórico
-                        </Text>
+                        <MaterialIcons name="history" size={40} color="white" />
                         </TouchableOpacity>
                         
             </View>
