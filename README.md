@@ -1,6 +1,6 @@
 # myCommerce
 
-"myCommerce is an app built to help small business owners gain more control over their sales and stock."
+myCommerce is an app built to help small business owners gain more control over their sales and stock.
 
 ## How I built this 
 
