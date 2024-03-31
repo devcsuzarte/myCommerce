@@ -18,6 +18,7 @@ export const s = StyleSheet.create({
         paddingTop: 50,
         paddingBottom: 10,
         paddingHorizontal: 5,
+        marginBottom: 18,
     
         },
     
@@ -38,7 +39,7 @@ export const s = StyleSheet.create({
         width: "100%",
         paddingHorizontal: 20,
         marginBottom: 20,
-               
+
         },
     
     inputTitle: {
@@ -67,6 +68,7 @@ export const s = StyleSheet.create({
         
     
         },
+
         btnView: {
         
             width: "100%",
@@ -82,18 +84,20 @@ export const s = StyleSheet.create({
             marginHorizontal: 20,
             marginBottom: 20,
             borderRadius: 7,
-    
-            
+
             shadowColor: "#000",
             shadowOffset: {
-            width: 0,
-            height: 1,
+                width: 0,
+                height: 1,
             },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
+            shadowOpacity: 0.20,
+            shadowRadius: 1.41,
+
+            elevation: 2,
     
-            elevation: 3,
-    
+            
+           
+                
         },
     
         btnTxt: {

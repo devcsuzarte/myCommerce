@@ -64,12 +64,62 @@ const signInError = (getErroCode) => {
 
 const signUpError = (getErroCode) =>
   {
-    Alert.alert('Erro ao fazer cadastro', getErroCode, [
-      {
-        text: 'Ok',
-        onPress: () => console.log('Ok'),
-      },
-      ]);
+
+    let erroTitle = "Erro ao fazer cadastro"
+    
+    switch (getErroCode) {
+      
+      case "auth/invalid-email":
+  
+        Alert.alert(erroTitle, "E-mail inválido", [
+          {
+            text: 'Ok',
+            onPress: () => console.log('Ok'),
+          },
+        ]);
+        break;
+
+        case "auth/weak-password":
+  
+        Alert.alert(erroTitle, "Senha fraca", [
+          {
+            text: 'Ok',
+            onPress: () => console.log('Ok'),
+          },
+        ]);
+        break;
+
+        case "auth/email-already-in-use":
+  
+        Alert.alert(erroTitle, "E-mail já cadastrado", [
+          {
+            text: 'Ok',
+            onPress: () => console.log('Ok'),
+          },
+        ]);
+        break;
+  
+        case "auth/network-request-failed":
+  
+            Alert.alert(erroTitle, "Verifique sua conexão com a internet", [
+              {
+                text: 'Ok',
+                onPress: () => console.log('Ok'),
+              },
+            ]);
+            break;
+  
+        default:
+          Alert.alert(erroTitle, "Tente novamente", [
+            {
+              text: 'Ok',
+              onPress: () => console.log('Ok'),
+            },
+          ]);
+            break;
+  
+    }
+
     }
   
   

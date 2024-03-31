@@ -19,7 +19,6 @@ export function SignUpScreen({ navigation }){
         Alert.alert('Erro ao fazer login', error, [
             {
               text: 'Ok',
-              onPress: () => console.log('Ok'),
             },
           ]);
 
@@ -43,12 +42,7 @@ export function SignUpScreen({ navigation }){
     
             }
         }
-
-
-        
-
-        
-    }
+ }
     
 
     return(
