@@ -17,6 +17,7 @@ export const s = StyleSheet.create({
 
     backgroundColor: "#1789fc",
     paddingBottom: 15,
+    paddingHorizontal: 8,
 
 },
 
@@ -76,6 +77,31 @@ export const s = StyleSheet.create({
    searchBtn: {
 
     flexDirection: "flex-end",
+
+   },
+
+   headerBar: {
+    
+    flexDirection: "row",
+    justifyContent: "space-between",
+
+    marginHorizontal: 8,
+    marginTop: 15,
+    
+
+   },
+
+   headerTxtBar: {
+
+    color: "#f5f5f5",
+    //fontWeight: "bold",
+    fontSize: 16,
+
+    padding: 10,
+    borderRadius: 7,
+
+    backgroundColor:  'rgba(0, 0, 0, 0.25)',
+
 
    },
 

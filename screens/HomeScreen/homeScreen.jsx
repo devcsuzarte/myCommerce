@@ -131,10 +131,44 @@ export function HomeScreen({ navigation, route }){
                         </TouchableOpacity>
                     </View>
 
-                </View>
-                <View style={s.root}>
-                    
+                    <View style={s.headerBar}>
+                    <TouchableOpacity
+                            style={s.btn}
+                            onPress={() => navigation.navigate('Buy', {
+                                dbID: userID,
+                                itemList: itemsList
+                            })}
+                        >
+                        <Text style={s.headerTxtBar}>
+                            VENDER
+                        </Text>
+                        </TouchableOpacity>
 
+                        <TouchableOpacity
+                            style={s.btn}
+                            onPress={() => navigation.navigate('Add', {
+                                dbID: userID,
+                            })}
+                        >
+                        <Text style={s.headerTxtBar}>
+                            ADICIONAR
+                        </Text>     
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={s.btn}
+                            onPress={() => navigation.navigate('Records', {
+                                dbID: userID,
+                            })}
+                        >
+                        <Text style={s.headerTxtBar}>
+                            HISTÓRICO
+                        </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                </View>
+
+                <View style={s.root}>
                     <View style={s.titleView}>
                     <SimpleLineIcons name="arrow-right" size={24} color="#6CA0FF" />
                     {itemsList.length > 0 ? <Text style={s.title}>MEUS ITENS:</Text> : <Text style={s.title}>Nenhum item encontrado</Text>} 
@@ -173,40 +207,6 @@ export function HomeScreen({ navigation, route }){
 
                 
                 </View>
-
-                <View style={s.bottomBar}>
-
-
-    
-                        <TouchableOpacity
-                            style={s.btn}
-                            onPress={() => navigation.navigate('Buy', {
-                                dbID: userID,
-                                itemList: itemsList
-                            })}
-                        >
-                        <MaterialIcons name="arrow-circle-up" size={40} color="white" />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={s.btn}
-                            onPress={() => navigation.navigate('Add', {
-                                dbID: userID,
-                            })}
-                        >
-                        <MaterialIcons name="add-circle-outline" size={40} color="white" />      
-                        </TouchableOpacity>
-                    
-                        <TouchableOpacity
-                            style={s.btn}
-                            onPress={() => navigation.navigate('Records', {
-                                dbID: userID,
-                            })}
-                        >
-                        <MaterialIcons name="history" size={40} color="white" />
-                        </TouchableOpacity>
-                        
-            </View>
             </>
         </TouchableWithoutFeedback>
     )
